@@ -1,5 +1,5 @@
 #use latest armv7hf compatible OS
-FROM balenalib/armv7hf-debian:stretch
+FROM balenalib/amd64-debian:stretch
 
 #dynamic build arguments coming from the /hook/build file
 ARG BUILD_DATE
@@ -11,7 +11,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF
 
 #enable building ARM container on x86 machinery on the web (comment out next line if built on Raspberry)
-RUN [ "cross-build-start" ]
+#RUN [ "cross-build-start" ]
 
 #version
 ENV HILSCHERNETPI_TEAMVIEWER 1.0.0
@@ -29,8 +29,8 @@ ENV TEAMVIEWER_PASSWD 12345678
 RUN apt-get update  \
     && apt-get install -y dpkg \
 #install TeamViewer
-    && curl -fSL -o /tmp/teamviewer-host_armhf.deb https://dl.tvcdn.de/download/linux/version_14x/teamviewer-host_14.1.9025_armhf.deb \
-    && dpkg -i /tmp/teamviewer-host_armhf.deb || apt-get install -yq --no-install-recommends -f \
+    && curl -fSL -o /tmp/teamviewer-host_amd64.deb https://dl.tvcdn.de/download/linux/version_14x/teamviewer-host_14.1.9025_amd64.deb \
+    && dpkg -i /tmp/teamviewer-host_amd64.deb || apt-get install -yq --no-install-recommends -f \
 #remove TeamViewer login details created during build process
     && rm /opt/teamviewer/config/* \
     && rm /opt/teamviewer/logfiles/* \
@@ -48,4 +48,4 @@ ENTRYPOINT ["/etc/init.d/entrypoint.sh"]
 STOPSIGNAL SIGTERM
 
 #stop processing ARM emulation (comment out next line if built on Raspberry)
-RUN [ "cross-build-end" ]
+#RUN [ "cross-build-end" ]

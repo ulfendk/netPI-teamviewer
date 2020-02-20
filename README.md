@@ -1,3 +1,6 @@
+# Quick and dirty conversion to `amd64`
+Should work for e.g. Intel NUC running HASS.IO - but not tested yet.
+
 ## TeamViewer
 
 [![](https://images.microbadger.com/badges/image/hilschernetpi/netpi-teamviewer.svg)](https://microbadger.com/images/hilschernetpi/netpi-teamviewer "Teamviewer")
